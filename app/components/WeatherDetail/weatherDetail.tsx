@@ -4,7 +4,7 @@ import styles from "./weatherDetail.module.css";
 // Define the types
 type WeatherDetailProps = {
   label: string;
-  value: number;
+  value: string;
   unit: string;
 };
 
@@ -13,11 +13,10 @@ const WeatherDetail: React.FC<WeatherDetailProps> = ({
   value,
   unit,
 }) => {
-  // console.log("details: ", details);
   return (
     <div className={styles.detailsContainer}>
       <p className={styles.weatherInfoLabel}>{label}</p>
-      <p className={styles.weatherInfoValue}>{value.toFixed() + unit}</p>
+      <p className={styles.weatherInfoValue}>{value + unit}</p>
     </div>
   );
 };

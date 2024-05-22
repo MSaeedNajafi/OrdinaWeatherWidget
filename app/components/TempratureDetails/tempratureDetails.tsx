@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./tempratureDetails.module.css";
 import WeatherDetail from "../WeatherDetail/weatherDetail";
+import ForecastCondition from "../ForecastCondition/ForecastCondition";
 
 // Define the types
 type WeatherCondition = {
@@ -40,37 +41,42 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
 }) => {
   return (
     <div>
-      <div className={styles.forecastContainer}>
-        {details &&
-          details.map((condition) => (
-            <div key={condition.id} className={styles.forecastInfo}>
-              <p>
-                {condition.main} - <strong>{condition.description}</strong>
-              </p>
-              <img
-                src={`http://openweathermap.org/img/wn/${condition.icon}.png`}
-                alt={condition.description}
-              />
-            </div>
-          ))}
-      </div>
       <div className={styles.tempratureDetails}>
-        <div>
-          <p className={styles.sunsetContainer}>
-            sunrise:{" "}
-            <span className={styles.sunsetTime}>{formatDateUTC(sunrise)}</span>
-          </p>
-          <p className={styles.sunsetContainer}>
-            sunset:{" "}
-            <span className={styles.sunsetTime}>{formatDateUTC(sunset)}</span>
-          </p>
+        <div className={styles.forecastContainer}>
+          {details &&
+            details.map((condition) => (
+              <ForecastCondition
+                id={condition.id}
+                main={""}
+                description={condition.description}
+                icon={condition.icon}
+              />
+            ))}
         </div>
         <p className={styles.temp}>{temp.toFixed()}°</p>
         <div>
-          <WeatherDetail label={"feels Like: "} value={feelsLike} unit={"°"} />
-          <WeatherDetail label={"humidity: "} value={humidity} unit={"%"} />
-          <WeatherDetail label={"wind: "} value={wind} unit={"m/h"} />
+          <WeatherDetail
+            label={"feels Like: "}
+            value={feelsLike.toFixed()}
+            unit={"°"}
+          />
+          <WeatherDetail
+            label={"humidity: "}
+            value={humidity.toFixed()}
+            unit={"%"}
+          />
+          <WeatherDetail label={"wind: "} value={wind.toFixed()} unit={"m/h"} />
         </div>
+      </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <p className={styles.sunsetContainer}>
+          Rise:{" "}
+          <span className={styles.sunsetTime}>{formatDateUTC(sunrise)}</span>
+        </p>
+        <p className={styles.sunsetContainer}>
+          {","}Set:{" "}
+          <span className={styles.sunsetTime}>{formatDateUTC(sunset)}</span>
+        </p>
       </div>
     </div>
   );

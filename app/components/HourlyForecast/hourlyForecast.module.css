@@ -1,0 +1,13 @@
+.detailsContainer {
+  display: flex;
+  flex-direction: row;
+  /* background-color: blue; */
+}
+
+.hourCard {
+  flex: 0 0 20%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  user-select: none;
+}

@@ -8,6 +8,8 @@ import TempratureDetails from "../TempratureDetails/tempratureDetails";
 import getLocationData from "@/app/utils/locationService";
 import getWeatherData from "@/app/utils/weatherService";
 import Form from "../Form/form";
+import HourlyForecast from "../HourlyForecast/hourlyForecast";
+import DailyForecast from "../DailyForecast/dailyForecast";
 
 const API_KEY = "ab899246f13ec7b700d0fb7cab75d528";
 
@@ -63,10 +65,7 @@ const Input: React.FC = () => {
         setCurrentTime(weatherResponse.current.dt);
         setDaily(weatherResponse.daily);
         setHourly(weatherResponse.hourly);
-        // setHumidity(weatherResponse.current.humidity);
-        // console.log(weatherData);
-        // console.log("weatherResponse-->", weatherResponse);
-        // console.log("weather-->", weatherResponse.current.weather);
+        // console.log("weatherResponse.current: ", weatherResponse);
       } else {
         throw new Error("No location data found");
       }
@@ -80,18 +79,6 @@ const Input: React.FC = () => {
     setCity(e.target.value);
     setSubmitted(false);
   };
-
-  // console.log("daily -> ", daily);
-  // console.log("hourly ->", hourly);
-  // console.log("forecast ->", forecast);
-
-  // daily.map((day: any) => {
-  //   console.log(new Date(day.dt * 1000).toLocaleString());
-  // });
-
-  // hourly.map((hour: any) => {
-  //   console.log("HH: ", new Date(hour.dt * 1000).toLocaleString());
-  // });
 
   return (
     <div className={styles.main}>
@@ -115,6 +102,8 @@ const Input: React.FC = () => {
             temp={temp}
             wind={wind}
           />
+          <HourlyForecast hourly={hourly} />
+          <DailyForecast daily={daily} />
         </div>
       )}
     </div>

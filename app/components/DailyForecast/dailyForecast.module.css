@@ -1,0 +1,16 @@
+.dayCard {
+  flex: 0 0 20%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  user-select: none;
+}
+
+.tempratureDetails {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sunsetTime {
+  font-size: 14px;
+}
