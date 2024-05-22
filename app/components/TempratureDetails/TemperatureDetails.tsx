@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./tempratureDetails.module.css";
-import WeatherDetail from "../WeatherDetail/weatherDetail";
+import styles from "./TemperatureDetails.module.css";
 import ForecastCondition from "../ForecastCondition/ForecastCondition";
+import WeatherDetail from "../WeatherDetail/WeatherDetail";
 
 // Define the types
 type WeatherCondition = {
@@ -19,6 +19,8 @@ type TemperatureDetailsProps = {
   sunrise: number;
   sunset: number;
   wind: number;
+  maxTemp?: number;
+  minTemp?: number;
 };
 
 function formatDateUTC(unixTime: number) {
@@ -38,9 +40,19 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
   sunrise,
   sunset,
   wind,
+  maxTemp,
+  minTemp,
 }) => {
   return (
-    <div>
+    <div className={styles.temperatureDetailsContainer}>
+      {details &&
+        details.map((condition) => (
+          <ForecastCondition
+            id={condition.id}
+            main={condition.main}
+            description={condition.description}
+          />
+        ))}
       <div className={styles.tempratureDetails}>
         <div className={styles.forecastContainer}>
           {details &&
@@ -68,15 +80,25 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
           <WeatherDetail label={"wind: "} value={wind.toFixed()} unit={"m/h"} />
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <p className={styles.sunsetContainer}>
+      <div className={styles.sunsetContainer}>
+        <p className={styles.tempDetailsText}>
           Rise:{" "}
           <span className={styles.sunsetTime}>{formatDateUTC(sunrise)}</span>
         </p>
-        <p className={styles.sunsetContainer}>
-          {","}Set:{" "}
+        <p className={styles.tempDetailsText}>
+          Set:{" "}
           <span className={styles.sunsetTime}>{formatDateUTC(sunset)}</span>
         </p>
+        {minTemp && (
+          <p className={styles.tempDetailsText}>
+            Min: <span className={styles.sunsetTime}>{minTemp}°</span>
+          </p>
+        )}
+        {maxTemp && (
+          <p className={styles.tempDetailsText}>
+            Max: <span className={styles.sunsetTime}>{maxTemp}°</span>
+          </p>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./weatherDetail.module.css";
+import styles from "./WeatherDetail.module.css";
 
 // Define the types
 type WeatherDetailProps = {

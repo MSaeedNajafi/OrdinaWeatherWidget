@@ -1,8 +1,6 @@
-import React, { useState, FormEvent } from "react";
+import React from "react";
 import styles from "./page.module.css";
-import Input from "./components/Input/input";
-
-const API_KEY = "ab899246f13ec7b700d0fb7cab75d528";
+import Input from "./components/WeatherComponent/WeatherComponent";
 
 export default function Home() {
   return (

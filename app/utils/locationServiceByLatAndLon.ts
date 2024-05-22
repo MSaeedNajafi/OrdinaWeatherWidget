@@ -1,8 +1,8 @@
 const API_KEY = "ab899246f13ec7b700d0fb7cab75d528";
-const BASE_URL = "http://api.openweathermap.org/geo/1.0/direct";
+const BASE_URL = "http://api.openweathermap.org/geo/1.0/reverse";
 
-const getLocationData = async (city: string) => {
-  const url = `${BASE_URL}?q=${city}&appid=${API_KEY}`;
+const getLocationDataByLatAndLon = async (lat: string, lon: string) => {
+  const url = `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
   try {
     // Fetch location data
     const response = await fetch(url);
@@ -14,4 +14,4 @@ const getLocationData = async (city: string) => {
   }
 };
 
-export default getLocationData;
+export default getLocationDataByLatAndLon;

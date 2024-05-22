@@ -1,5 +1,5 @@
 import { formatDateTime } from "@/app/utils/formatDateTime";
-import styles from "./date.module.css";
+import styles from "./CurrentDateTime.module.css";
 
 type CurrentDateTimeProps = {
   currentTime: number;
@@ -11,8 +11,8 @@ const CurrentDateTime: React.FC<CurrentDateTimeProps> = ({ currentTime }) => {
 
   return (
     <div className={styles.today}>
-      <p>{formattedDate}</p>
-      <p>Local time: {formattedTime}</p>
+      <p className={styles.text}>{formattedDate}</p>
+      <p className={styles.text}>Local time: {formattedTime}</p>
     </div>
   );
 };

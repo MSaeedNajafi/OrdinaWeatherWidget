@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./hourlyForecast.module.css";
+import styles from "./HourlyForecast.module.css";
 import Carousel from "../Carousel/Carousel";
 import ForecastCondition, {
   TemperatureDetailsProps,
@@ -41,10 +41,14 @@ type HourlyForecastProps = {
 const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
   const renderItems = [];
   let lastDate = null;
+  let i = 1;
 
   for (const hour of hourly) {
+    if (i > 24) {
+      break;
+    }
     const formattedDateTime = formatDateTime(hour.dt);
-    const { date, dayOfWeek, time, hour: hourValue } = formattedDateTime;
+    const { dayOfWeek, time } = formattedDateTime;
 
     renderItems.push(
       <div key={hour.dt} className={styles.hourCard}>
@@ -73,17 +77,12 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
         </div>
       </div>
     );
-
-    if (lastDate && date.getDate() !== lastDate.getDate() && hourValue === 0) {
-      break;
-    }
-
-    lastDate = date;
+    i++;
   }
 
   return (
     <div>
-      <div style={{ paddingBottom: 20 }}>
+      <div>
         <h3>HOURLY FORECAST</h3>
         <hr />
       </div>

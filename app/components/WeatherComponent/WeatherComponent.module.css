@@ -1,12 +1,8 @@
 .main {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start;
-  align-items: center; */
-  /* padding: 6rem; */
-  /* min-height: 100vh; */
-  /* background-color: lightslategray; */
   width: 100%;
+  /* background-color: blue; */
 }
 
 .button {
@@ -24,4 +20,20 @@
 .weatherInfoContainer {
   /* background-color: red; */
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.unitSwitchContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

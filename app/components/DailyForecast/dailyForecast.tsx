@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./dailyForecast.module.css";
+import styles from "./DailyForecast.module.css";
 import Carousel from "../Carousel/Carousel";
-import WeatherDetail from "../WeatherDetail/weatherDetail";
+import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import ForecastCondition from "../ForecastCondition/ForecastCondition";
 
 function formatDateTime(unixTime: number) {
@@ -14,6 +14,7 @@ function formatDateTime(unixTime: number) {
     month: "long",
     day: "numeric",
     hour: "2-digit",
+    minute: "2-digit",
   });
 
   // Extracting components
@@ -45,8 +46,6 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
   for (const day of daily) {
     const formattedDateTime = formatDateTime(day.dt);
     const { dayOfWeek, monthAndDate } = formattedDateTime;
-
-    console.log("day: ", day);
 
     renderItems.push(
       <div key={day.dt} className={styles.dayCard}>

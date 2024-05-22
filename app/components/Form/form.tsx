@@ -10,22 +10,15 @@ type FormProps = {
 
 const Form: React.FC<FormProps> = ({ city, handleChanage, handleSubmit }) => {
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit}>
       <input
-        placeholder="Type a city"
+        placeholder="Search for a city..."
         type="text"
         name="City Name"
         onChange={handleChanage}
         value={city}
         className={styles.input}
       />
-      <button
-        className={styles.button}
-        type="submit"
-        disabled={city.length < 1}
-      >
-        Submit
-      </button>
     </form>
   );
 };

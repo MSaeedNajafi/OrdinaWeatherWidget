@@ -7,7 +7,7 @@ export type TemperatureDetailsProps = {
   id: number;
   main: string;
   description: string;
-  icon: string | undefined;
+  icon?: string | undefined;
 };
 
 const ForecastCondition: React.FC<TemperatureDetailsProps> = ({
@@ -21,10 +21,12 @@ const ForecastCondition: React.FC<TemperatureDetailsProps> = ({
       <p title={description} className={styles.WeatherCondition}>
         {main}
       </p>
-      <img
-        src={`http://openweathermap.org/img/wn/${icon}.png`}
-        alt={description}
-      />
+      {icon && (
+        <img
+          src={`http://openweathermap.org/img/wn/${icon}.png`}
+          alt={description}
+        />
+      )}
     </div>
   );
 };
