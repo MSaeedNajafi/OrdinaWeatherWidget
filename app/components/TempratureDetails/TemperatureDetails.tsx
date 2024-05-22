@@ -47,22 +47,26 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
     <div className={styles.temperatureDetailsContainer}>
       {details &&
         details.map((condition) => (
-          <ForecastCondition
-            id={condition.id}
-            main={condition.main}
-            description={condition.description}
-          />
+          <div key={condition.id}>
+            <ForecastCondition
+              id={condition.id}
+              main={condition.main}
+              description={condition.description}
+            />
+          </div>
         ))}
       <div className={styles.tempratureDetails}>
         <div className={styles.forecastContainer}>
           {details &&
             details.map((condition) => (
-              <ForecastCondition
-                id={condition.id}
-                main={""}
-                description={condition.description}
-                icon={condition.icon}
-              />
+              <div key={condition.id}>
+                <ForecastCondition
+                  id={condition.id}
+                  main={""}
+                  description={condition.description}
+                  icon={condition.icon}
+                />
+              </div>
             ))}
         </div>
         <p className={styles.temp}>{temp.toFixed()}°</p>

@@ -41,8 +41,7 @@ const Input: React.FC = () => {
   const fetchWeather = async (lat: string, lon: string) => {
     setError(null);
     const weatherResponse = await getWeatherData(lat, lon);
-    console.log(weatherResponse);
-    console.log(weatherResponse);
+    // console.log(weatherResponse);
     setWeatherData(weatherResponse);
     setForecast(weatherResponse.current.weather);
     setFeels(weatherResponse.current.feels_like);

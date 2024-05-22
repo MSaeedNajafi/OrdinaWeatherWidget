@@ -1,16 +1,15 @@
 import React from "react";
 import styles from "./ForecastCondition.module.css";
-import { isDate } from "util/types";
 
 // Define the types
-export type TemperatureDetailsProps = {
+export type ForecastConditionProps = {
   id: number;
   main: string;
   description: string;
   icon?: string | undefined;
 };
 
-const ForecastCondition: React.FC<TemperatureDetailsProps> = ({
+const ForecastCondition: React.FC<ForecastConditionProps> = ({
   id,
   main,
   description,
