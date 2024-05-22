@@ -1,0 +1,13 @@
+.detailsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weatherInfoLabel {
+  font-size: 12px;
+}
+
+.weatherInfoValue {
+  font-weight: bold;
+}

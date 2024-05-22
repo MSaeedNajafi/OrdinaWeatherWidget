@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start;
+  align-items: center; */
+  /* padding: 6rem; */
+  /* min-height: 100vh; */
+  /* background-color: lightslategray; */
+  width: 100%;
+}
+
+.button {
+  background-color: blueviolet;
+  padding: 10px 20px;
+  border: none;
+}
+
+.input {
+  background-color: skyblue;
+  padding: 10px 20px;
+  border: none;
+}
+
+.weatherInfoContainer {
+  /* background-color: red; */
+  margin-top: 1rem;
+}
