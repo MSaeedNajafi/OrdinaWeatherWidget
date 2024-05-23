@@ -6,3 +6,13 @@
   align-content: center;
   margin-bottom: 16px;
 }
+
+.city {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.city:hover {
+  transform: scale(1.1);
+}

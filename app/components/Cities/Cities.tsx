@@ -23,7 +23,7 @@ const Cities: React.FC<CitiesProps> = ({ cities, setCity, fetchLocation }) => {
               fetchLocation(city.name);
             }}
           >
-            {city.name}
+            <p className={styles.city}>{city.name}</p>
           </div>
         );
       })}
