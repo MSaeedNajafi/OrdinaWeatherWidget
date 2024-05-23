@@ -4,10 +4,10 @@ import DailyForecast from "../DailyForecast/DailyForecast";
 import styles from "./WeatherDetails.module.css";
 import CurrentDateTime from "../CurrentDateTime/CurrentDateTime";
 import TemperatureDetails from "../TempratureDetails/TemperatureDetails";
-import { DayDTO, HourDTO } from "@/app/utils/Types";
+import { DayDTO, HourDTO, WeatherDTO } from "@/app/utils/Types";
 
 interface WeatherDetailsProps {
-  currentWeather: any;
+  currentWeather: WeatherDTO;
   cityName: string;
   state?: string;
   countryName: string;

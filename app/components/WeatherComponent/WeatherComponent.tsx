@@ -13,14 +13,15 @@ import SearchIcon from "../../icons/search-svgrepo-com.svg";
 import Cities from "../Cities/Cities";
 import WeatherDetails from "../WeatherDetails.tsx/WeatherDetails";
 import { mapToDayDTO } from "@/app/utils/mapToDayDTO";
-import { DayDTO, HourDTO, LocationData } from "@/app/utils/Types";
+import { DayDTO, HourDTO, LocationData, WeatherDTO } from "@/app/utils/Types";
 import { mapToHourDTO } from "@/app/utils/mapToHourDTO";
+import { mapToWeatherDTO } from "@/app/utils/mapToWeatherDTO";
 
 const WeatherComponent: React.FC = () => {
   const [city, setCity] = useState("");
   const [submitted, setSubmitted] = useState(false);
   // store fetched data
-  const [currentWeather, setCurrentWeather] = useState<any>([]);
+  const [currentWeather, setCurrentWeather] = useState<WeatherDTO | null>(null);
   const [daily, setDaily] = useState<DayDTO[]>([]);
   const [hourly, setHourly] = useState<HourDTO[]>([]);
   const [cityName, setCityName] = useState("");
@@ -66,6 +67,7 @@ const WeatherComponent: React.FC = () => {
         await fetchWeather(lat, lon);
       } else {
         setError("No location found for the provided city name.");
+        setCurrentWeather(null);
       }
     } catch (error) {
       console.error("Error fetching location data:", error);
@@ -162,7 +164,7 @@ const WeatherComponent: React.FC = () => {
       ) : (
         submitted && (
           <WeatherDetails
-            currentWeather={currentWeather}
+            currentWeather={mapToWeatherDTO(currentWeather)}
             cityName={cityName}
             state={state}
             countryName={countryName}

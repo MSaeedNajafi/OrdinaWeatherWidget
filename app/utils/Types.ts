@@ -36,3 +36,14 @@ export interface HourDTO {
   weather: ForecastConditionProps[];
   temp: number;
 }
+
+export interface WeatherDTO {
+  dt: number;
+  weather: ForecastConditionProps[];
+  temp: number;
+  feels_like: number;
+  humidity: number;
+  wind_speed: number;
+  sunrise: number;
+  sunset: number;
+}
