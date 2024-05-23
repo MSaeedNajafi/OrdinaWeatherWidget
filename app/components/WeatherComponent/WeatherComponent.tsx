@@ -13,7 +13,7 @@ import SearchIcon from "../../icons/search-svgrepo-com.svg";
 import Cities from "../Cities/Cities";
 import WeatherDetails from "../WeatherDetails.tsx/WeatherDetails";
 import { mapToDayDTO } from "@/app/utils/mapToDayDTO";
-import { DayDTO, HourDTO } from "@/app/utils/Types";
+import { DayDTO, HourDTO, LocationData } from "@/app/utils/Types";
 import { mapToHourDTO } from "@/app/utils/mapToHourDTO";
 
 const WeatherComponent: React.FC = () => {
@@ -49,26 +49,34 @@ const WeatherComponent: React.FC = () => {
 
   const fetchLocation = async (city: string) => {
     if (city.length === 0) {
+      setError("City name cannot be empty.");
+      setSubmitted(false);
       return;
     }
+    let locationData: LocationData[] | null = null;
     try {
       setLoading(true);
       setSubmitted(true);
-      const locationData = await getLocationDataByName(city);
-      if (locationData.length > 0) {
+      locationData = await getLocationDataByName(city);
+      if (locationData && locationData.length > 0) {
         const { name, country, state, lon, lat } = locationData[0];
         setCityName(name);
         setCountryName(country);
         setState(state);
         await fetchWeather(lat, lon);
-        setLoading(false);
       } else {
-        throw new Error("No location found.");
+        setError("No location found for the provided city name.");
       }
     } catch (error) {
+      console.error("Error fetching location data:", error);
+      setError(
+        "An error occurred while fetching the location data. Please try again."
+      );
+    } finally {
       setLoading(false);
-      setSubmitted(false);
-      setError(error + "");
+      if (!locationData || locationData.length === 0) {
+        setSubmitted(false);
+      }
     }
   };
 
@@ -92,6 +100,11 @@ const WeatherComponent: React.FC = () => {
         loc.longitude.toString()
       );
 
+      // Check if locationData is valid and has at least one result
+      if (locationData.length === 0) {
+        throw new Error("No location data found for the given coordinates.");
+      }
+
       const { name, country, state } = locationData[0];
       setCity(name);
       setCityName(name);
@@ -99,9 +112,10 @@ const WeatherComponent: React.FC = () => {
       setState(state);
       await fetchWeather(loc.latitude, loc.longitude);
     } catch (err) {
-      setError(err + "");
+      setError("Error in handleGetLocation" + err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const cities = [

@@ -10,6 +10,14 @@ export interface Location {
   longitude: number;
 }
 
+export interface LocationData {
+  country: string;
+  lat: number;
+  lon: number;
+  name: string;
+  state: string;
+}
+
 export interface TempDTO {
   day: number;
   min: number;
