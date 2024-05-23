@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./WeatherDetail.module.css";
+import styles from "./WeatherInfoBox.module.css";
 import SVGIcon from "../SVGIcon/SVGIcon";
 
 // Define the types
@@ -10,7 +10,7 @@ type WeatherDetailProps = {
   icon?: string;
 };
 
-const WeatherDetail: React.FC<WeatherDetailProps> = ({
+const WeatherInfoBox: React.FC<WeatherDetailProps> = ({
   label,
   value,
   unit,
@@ -25,4 +25,4 @@ const WeatherDetail: React.FC<WeatherDetailProps> = ({
   );
 };
 
-export default WeatherDetail;
+export default WeatherInfoBox;

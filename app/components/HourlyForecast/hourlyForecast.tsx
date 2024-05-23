@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./HourlyForecast.module.css";
 import Carousel from "../Carousel/Carousel";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
-import WeatherDetail from "../WeatherDetail/WeatherDetail";
+import WeatherInfoBox from "../WeatherInfoBox/WeatherInfoBox";
 import { ForecastConditionProps, HourDTO } from "@/app/utils/Types";
 import ForecastCondition from "../ForecastCondition/ForecastCondition";
 
@@ -34,7 +34,7 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
                   description={condition.description}
                   icon={condition.icon}
                 />
-                <WeatherDetail
+                <WeatherInfoBox
                   label={""}
                   value={Number(hour.temp).toFixed()}
                   unit={"°"}

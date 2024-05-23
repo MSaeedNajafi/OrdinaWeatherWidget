@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DailyForecast.module.css";
 import Carousel from "../Carousel/Carousel";
-import WeatherDetail from "../WeatherDetail/WeatherDetail";
+import WeatherInfoBox from "../WeatherInfoBox/WeatherInfoBox";
 import ForecastCondition from "../ForecastCondition/ForecastCondition";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
 import { DayDTO } from "@/app/utils/Types";
@@ -34,7 +34,7 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
         </div>
 
         <div className={styles.tempratureDetails}>
-          <WeatherDetail
+          <WeatherInfoBox
             label={""}
             value={Number(day.temp.day).toFixed()}
             unit={"°"}

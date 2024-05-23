@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./TemperatureDetails.module.css";
-import WeatherDetail from "../WeatherDetail/WeatherDetail";
+import WeatherInfoBox from "../WeatherInfoBox/WeatherInfoBox";
 import { formatDateTime } from "@/app/utils/formatDateTime";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
 import temptratureIcon from "../../icons/temperature-full-svgrepo-com.svg";
@@ -52,19 +52,19 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
         </div>
         <p className={styles.temp}>{currentWeather?.temp?.toFixed()}°</p>
         <div>
-          <WeatherDetail
+          <WeatherInfoBox
             label={"Feels Like: "}
             value={currentWeather?.feels_like?.toFixed()}
             unit={"°"}
             icon={temptratureIcon}
           />
-          <WeatherDetail
+          <WeatherInfoBox
             label={"Humidity: "}
             value={currentWeather?.humidity?.toFixed()}
             unit={"%"}
             icon={humidityIcon}
           />
-          <WeatherDetail
+          <WeatherInfoBox
             label={"Wind: "}
             value={currentWeather?.wind_speed?.toFixed()}
             unit={"m/h"}
@@ -73,20 +73,20 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
         </div>
       </div>
       <div className={styles.sunsetContainer}>
-        <WeatherDetail
+        <WeatherInfoBox
           label={"Rise: "}
           value={convertUnixToDetailedDateTime(currentWeather?.sunrise).time}
           unit={""}
           icon={sunriseIcon}
         />
-        <WeatherDetail
+        <WeatherInfoBox
           label={"Set: "}
           value={convertUnixToDetailedDateTime(currentWeather?.sunset).time}
           unit={""}
           icon={sunsetIcon}
         />
         {minTemp && (
-          <WeatherDetail
+          <WeatherInfoBox
             label={"Low: "}
             value={minTemp}
             unit={"°"}
@@ -94,7 +94,7 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
           />
         )}
         {maxTemp && (
-          <WeatherDetail
+          <WeatherInfoBox
             label={"High: "}
             value={maxTemp}
             unit={"°"}
