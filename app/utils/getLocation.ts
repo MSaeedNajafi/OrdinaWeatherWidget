@@ -1,7 +1,4 @@
-export interface Location {
-  latitude: number;
-  longitude: number;
-}
+import { Location } from "./Types";
 
 export const getLocation = (): Promise<Location> => {
   return new Promise((resolve, reject) => {

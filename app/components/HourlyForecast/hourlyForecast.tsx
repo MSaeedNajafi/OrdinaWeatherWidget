@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./HourlyForecast.module.css";
 import Carousel from "../Carousel/Carousel";
-import ForecastCondition, {
-  ForecastConditionProps,
-} from "../ForecastCondition/ForecastCondition";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
+import { ForecastConditionProps, HourDTO } from "@/app/utils/Types";
+import ForecastCondition from "../ForecastCondition/ForecastCondition";
 
 type HourlyForecastProps = {
-  hourly: any[];
+  hourly: HourDTO[];
 };
 
 const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {

@@ -1,12 +1,6 @@
 import React from "react";
 import styles from "./ForecastCondition.module.css";
-
-export type ForecastConditionProps = {
-  id: number;
-  main: string;
-  description: string;
-  icon?: string | undefined;
-};
+import { ForecastConditionProps } from "@/app/utils/Types";
 
 const ForecastCondition: React.FC<ForecastConditionProps> = ({
   id,

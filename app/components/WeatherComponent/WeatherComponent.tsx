@@ -2,28 +2,27 @@
 import React, { useState, FormEvent } from "react";
 import classNames from "classnames";
 import styles from "./WeatherComponent.module.css";
-import CurrentDateTime from "../CurrentDateTime/CurrentDateTime";
-import TempratureDetails from "../TempratureDetails/TemperatureDetails";
 import getLocationDataByName from "@/app/utils/locationServiceByName";
 import getWeatherData from "@/app/utils/weatherService";
 import Form from "../Form/Form";
-import HourlyForecast from "../HourlyForecast/HourlyForecast";
-import DailyForecast from "../DailyForecast/DailyForecast";
-import { Location, getLocation } from "@/app/utils/getLocation";
+import { getLocation } from "@/app/utils/getLocation";
 import getLocationDataByLatAndLon from "@/app/utils/locationServiceByLatAndLon";
 import LocationSVG from "../../icons/location-pin-svgrepo-com.svg";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import SearchIcon from "../../icons/search-svgrepo-com.svg";
 import Cities from "../Cities/Cities";
-import WeatherInfo from "../WeatherDetails.tsx/WeatherDetails";
+import WeatherDetails from "../WeatherDetails.tsx/WeatherDetails";
+import { mapToDayDTO } from "@/app/utils/mapToDayDTO";
+import { DayDTO, HourDTO } from "@/app/utils/Types";
+import { mapToHourDTO } from "@/app/utils/mapToHourDTO";
 
 const WeatherComponent: React.FC = () => {
   const [city, setCity] = useState("");
   const [submitted, setSubmitted] = useState(false);
   // store fetched data
   const [currentWeather, setCurrentWeather] = useState<any>([]);
-  const [daily, setDaily] = useState<any[]>([]);
-  const [hourly, setHourly] = useState<any[]>([]);
+  const [daily, setDaily] = useState<DayDTO[]>([]);
+  const [hourly, setHourly] = useState<HourDTO[]>([]);
   const [cityName, setCityName] = useState("");
   const [countryName, setCountryName] = useState("");
   const [state, setState] = useState("");
@@ -148,13 +147,13 @@ const WeatherComponent: React.FC = () => {
         <p>loading....</p>
       ) : (
         submitted && (
-          <WeatherInfo
+          <WeatherDetails
             currentWeather={currentWeather}
             cityName={cityName}
             state={state}
             countryName={countryName}
-            daily={daily}
-            hourly={hourly}
+            daily={mapToDayDTO(daily)}
+            hourly={mapToHourDTO(hourly)}
           />
         )
       )}

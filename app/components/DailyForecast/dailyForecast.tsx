@@ -4,9 +4,10 @@ import Carousel from "../Carousel/Carousel";
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import ForecastCondition from "../ForecastCondition/ForecastCondition";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
+import { DayDTO } from "@/app/utils/Types";
 
 type DailyForecastProps = {
-  daily: any[];
+  daily: DayDTO[];
 };
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {

@@ -4,17 +4,18 @@ import DailyForecast from "../DailyForecast/DailyForecast";
 import styles from "./WeatherDetails.module.css";
 import CurrentDateTime from "../CurrentDateTime/CurrentDateTime";
 import TemperatureDetails from "../TempratureDetails/TemperatureDetails";
+import { DayDTO, HourDTO } from "@/app/utils/Types";
 
-interface WeatherInfoProps {
+interface WeatherDetailsProps {
   currentWeather: any;
   cityName: string;
   state?: string;
   countryName: string;
-  daily: any[];
-  hourly: any[];
+  daily: DayDTO[];
+  hourly: HourDTO[];
 }
 
-const WeatherInfo: React.FC<WeatherInfoProps> = ({
+const WeatherDetails: React.FC<WeatherDetailsProps> = ({
   currentWeather,
   cityName,
   state,
@@ -24,14 +25,15 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
 }) => {
   return (
     <div className={styles.weatherInfoContainer}>
-      <CurrentDateTime currentTime={currentWeather?.dt} />
+      <CurrentDateTime currentTime={currentWeather.dt} />
       <h2>
         {cityName}, {state && state + ", "} {countryName}
       </h2>
+      {/* get the min temp and max temp from today*/}
       <TemperatureDetails
         currentWeather={currentWeather}
-        maxTemp={daily[0]?.temp && daily[0]?.temp.max.toFixed()}
-        minTemp={daily[0]?.temp && daily[0]?.temp.min.toFixed()}
+        maxTemp={daily[0].temp.max.toFixed()}
+        minTemp={daily[0].temp.min.toFixed()}
       />
       <HourlyForecast hourly={hourly} />
       <DailyForecast daily={daily} />
@@ -39,4 +41,4 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   );
 };
 
-export default WeatherInfo;
+export default WeatherDetails;

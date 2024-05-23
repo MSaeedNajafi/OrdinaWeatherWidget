@@ -1,8 +1,5 @@
 import React from "react";
 import styles from "./TemperatureDetails.module.css";
-import ForecastCondition, {
-  ForecastConditionProps,
-} from "../ForecastCondition/ForecastCondition";
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import { formatDateTime } from "@/app/utils/formatDateTime";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
@@ -13,19 +10,13 @@ import arrowDownIcon from "../../icons/arrow-down-svgrepo-com.svg";
 import arrowTopIcon from "../../icons/arrow-top-svgrepo-com.svg";
 import sunriseIcon from "../../icons/sun-svgrepo-com.svg";
 import sunsetIcon from "../../icons/sunset-svgrepo-com.svg";
-
-// Define the types
-type WeatherCondition = {
-  id: number;
-  main: string;
-  description: string;
-  icon?: string;
-};
+import { ForecastConditionProps } from "@/app/utils/Types";
+import ForecastCondition from "../ForecastCondition/ForecastCondition";
 
 type TemperatureDetailsProps = {
   currentWeather?: any;
-  maxTemp?: number;
-  minTemp?: number;
+  maxTemp?: string;
+  minTemp?: string;
 };
 
 const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
@@ -97,7 +88,7 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
         {minTemp && (
           <WeatherDetail
             label={"Low: "}
-            value={minTemp.toString()}
+            value={minTemp}
             unit={"°"}
             icon={arrowDownIcon}
           />
@@ -105,7 +96,7 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
         {maxTemp && (
           <WeatherDetail
             label={"High: "}
-            value={maxTemp.toString()}
+            value={maxTemp}
             unit={"°"}
             icon={arrowTopIcon}
           />
