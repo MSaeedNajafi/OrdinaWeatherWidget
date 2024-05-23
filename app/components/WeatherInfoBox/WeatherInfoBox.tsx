@@ -3,14 +3,14 @@ import styles from "./WeatherInfoBox.module.css";
 import SVGIcon from "../SVGIcon/SVGIcon";
 
 // Define the types
-type WeatherDetailProps = {
+type WeatherInfoBoxProps = {
   label: string;
   value: string;
   unit: string;
   icon?: string;
 };
 
-const WeatherInfoBox: React.FC<WeatherDetailProps> = ({
+const WeatherInfoBox: React.FC<WeatherInfoBoxProps> = ({
   label,
   value,
   unit,
