@@ -20,16 +20,25 @@ const getWeatherData = async (
     if (!response.ok) {
       return {
         success: false,
-        error: response.statusText,
+        error: `Error: ${response.status} ${response.statusText}`,
       };
     }
 
     const data = await response.json();
+
+    if (typeof data !== "object" || data === null) {
+      return {
+        success: false,
+        error: "Invalid response format",
+      };
+    }
+
     return { success: true, data };
   } catch (error) {
+    // Network or other fetch-related errors
     return {
       success: false,
-      error: error + "",
+      error: `Fetch error: ${error}`,
     };
   }
 };
