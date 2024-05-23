@@ -16,7 +16,7 @@ export function convertUnixToDetailedDateTime(unixTime: number) {
   // Extracting components
   const dayOfWeek = formattedDate.split(",")[0];
   const monthAndDate = formattedDate.split(",")[1];
-  const year = formattedDate.split(",")[2].trim();
+  const year = formattedDate.split(",")[2];
   const time = formattedDate.split(" at ")[1];
 
   return {
