@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "./Cities.module.css";
 interface City {
   id: number;
   name: string;
@@ -13,16 +13,7 @@ interface CitiesProps {
 
 const Cities: React.FC<CitiesProps> = ({ cities, setCity, fetchLocation }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        alignItems: "center",
-        alignContent: "center",
-        marginBottom: 16,
-      }}
-    >
+    <div className={styles.cityContainer}>
       {cities.map((city) => {
         return (
           <div

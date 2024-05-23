@@ -24,18 +24,11 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
 
     renderItems.push(
       <div key={hour.dt} className={styles.hourCard}>
-        <p>{time}</p>
+        <p className={styles.timeText}>{time}</p>
         <div>
           {hour.weather &&
             hour.weather.map((condition: ForecastConditionProps) => (
-              <div
-                key={condition.id}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
+              <div key={condition.id} className={styles.ForecastCondition}>
                 <ForecastCondition
                   id={condition.id}
                   main={""}
@@ -59,7 +52,7 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
     <div>
       <div>
         <h3>HOURLY FORECAST</h3>
-        <hr />
+        <hr className={styles.line} />
       </div>
       <Carousel>{renderItems}</Carousel>
     </div>

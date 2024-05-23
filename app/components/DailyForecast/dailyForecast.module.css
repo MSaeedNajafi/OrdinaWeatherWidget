@@ -14,3 +14,18 @@
 .sunsetTime {
   font-size: 14px;
 }
+
+.ForecastCondition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.line {
+  border: 1px solid black;
+}

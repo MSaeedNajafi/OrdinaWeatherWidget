@@ -15,12 +15,12 @@ import LocationSVG from "../../icons/location-pin-svgrepo-com.svg";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import SearchIcon from "../../icons/search-svgrepo-com.svg";
 import Cities from "../Cities/Cities";
+import WeatherInfo from "../WeatherDetails.tsx/WeatherDetails";
 
 const WeatherComponent: React.FC = () => {
   const [city, setCity] = useState("");
   const [submitted, setSubmitted] = useState(false);
   // store fetched data
-  const [unit, setUnit] = useState("celsius");
   const [currentWeather, setCurrentWeather] = useState<any>([]);
   const [daily, setDaily] = useState<any[]>([]);
   const [hourly, setHourly] = useState<any[]>([]);
@@ -142,30 +142,20 @@ const WeatherComponent: React.FC = () => {
           height={25}
           handleClick={handleGetLocation}
         />
-        <div className={styles.unitSwitchContainer}>
-          <p onClick={() => setUnit("celsius")}>°C</p>
-          {"|"}
-          <p onClick={() => setUnit("fahrenheit")}>°F</p>
-        </div>
       </div>
       {error && <p>{error}</p>}
       {loading ? (
         <p>loading....</p>
       ) : (
         submitted && (
-          <div className={styles.weatherInfoContainer}>
-            <CurrentDateTime currentTime={currentWeather?.dt} />
-            <h2>
-              {cityName}, {state && state + ", "} {countryName}
-            </h2>
-            <TempratureDetails
-              currentWeather={currentWeather}
-              maxTemp={daily[0]?.temp && daily[0]?.temp.max.toFixed()}
-              minTemp={daily[0]?.temp && daily[0]?.temp.min.toFixed()}
-            />
-            <HourlyForecast hourly={hourly} />
-            <DailyForecast daily={daily} />
-          </div>
+          <WeatherInfo
+            currentWeather={currentWeather}
+            cityName={cityName}
+            state={state}
+            countryName={countryName}
+            daily={daily}
+            hourly={hourly}
+          />
         )
       )}
     </div>

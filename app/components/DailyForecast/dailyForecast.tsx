@@ -15,17 +15,15 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
     const { dayOfWeek, monthAndDate } = convertUnixToDetailedDateTime(day.dt);
     renderItems.push(
       <div key={day.dt} className={styles.dayCard}>
-        <p style={{ cursor: "help" }} title={day.summary}>
+        <p
+          className={styles.text}
+          title={day.summary}
+          style={{ cursor: "help" }}
+        >
           {dayOfWeek}
         </p>
-        <p>{monthAndDate}</p>
-        <div
-          style={{
-            display: "flex",
-            alignContent: "center",
-            justifyContent: "center",
-          }}
-        >
+        <p className={styles.text}>{monthAndDate}</p>
+        <div className={styles.ForecastCondition}>
           <ForecastCondition
             id={day.weather[0].id}
             main={""}
@@ -47,9 +45,9 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
 
   return (
     <div>
-      <div style={{ paddingBottom: 20 }}>
+      <div>
         <h3>DAILY FORECAST</h3>
-        <hr />
+        <hr className={styles.line} />
       </div>
       <Carousel>{renderItems}</Carousel>
     </div>

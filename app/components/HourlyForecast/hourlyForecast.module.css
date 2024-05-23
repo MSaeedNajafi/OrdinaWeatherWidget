@@ -10,3 +10,18 @@
   text-align: center;
   user-select: none;
 }
+
+.ForecastCondition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeText {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.line {
+  border: 1px solid black;
+}
