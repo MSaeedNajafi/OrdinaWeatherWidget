@@ -3,14 +3,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 1rem;
   min-height: 100vh;
   background-color: white;
 }
 
 .input {
   width: 100%;
-  padding: 1rem;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-  /* background-color: #fff; */
 }

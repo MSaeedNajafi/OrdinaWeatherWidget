@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./TemperatureDetails.module.css";
-import ForecastCondition from "../ForecastCondition/ForecastCondition";
+import ForecastCondition, {
+  ForecastConditionProps,
+} from "../ForecastCondition/ForecastCondition";
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
+import { formatDateTime } from "@/app/utils/formatDateTime";
+import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
 
 // Define the types
 type WeatherCondition = {
@@ -12,41 +16,20 @@ type WeatherCondition = {
 };
 
 type TemperatureDetailsProps = {
-  details?: WeatherCondition[];
-  temp: number;
-  feelsLike: number;
-  humidity: number;
-  sunrise: number;
-  sunset: number;
-  wind: number;
+  currentWeather?: any;
   maxTemp?: number;
   minTemp?: number;
 };
 
-function formatDateUTC(unixTime: number) {
-  // convert seconds to milliseconds
-  const date = new Date(unixTime * 1000);
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
 const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
-  details,
-  temp,
-  feelsLike,
-  humidity,
-  sunrise,
-  sunset,
-  wind,
+  currentWeather,
   maxTemp,
   minTemp,
 }) => {
   return (
     <div className={styles.temperatureDetailsContainer}>
-      {details &&
-        details.map((condition) => (
+      {currentWeather?.weather &&
+        currentWeather?.weather.map((condition: ForecastConditionProps) => (
           <div key={condition.id}>
             <ForecastCondition
               id={condition.id}
@@ -57,8 +40,8 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
         ))}
       <div className={styles.tempratureDetails}>
         <div className={styles.forecastContainer}>
-          {details &&
-            details.map((condition) => (
+          {currentWeather?.weather &&
+            currentWeather?.weather.map((condition: ForecastConditionProps) => (
               <div key={condition.id}>
                 <ForecastCondition
                   id={condition.id}
@@ -69,29 +52,37 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
               </div>
             ))}
         </div>
-        <p className={styles.temp}>{temp.toFixed()}°</p>
+        <p className={styles.temp}>{currentWeather?.temp?.toFixed()}°</p>
         <div>
           <WeatherDetail
             label={"feels Like: "}
-            value={feelsLike.toFixed()}
+            value={currentWeather?.feels_like?.toFixed()}
             unit={"°"}
           />
           <WeatherDetail
             label={"humidity: "}
-            value={humidity.toFixed()}
+            value={currentWeather?.humidity?.toFixed()}
             unit={"%"}
           />
-          <WeatherDetail label={"wind: "} value={wind.toFixed()} unit={"m/h"} />
+          <WeatherDetail
+            label={"wind: "}
+            value={currentWeather?.wind_speed?.toFixed()}
+            unit={"m/h"}
+          />
         </div>
       </div>
       <div className={styles.sunsetContainer}>
         <p className={styles.tempDetailsText}>
           Rise:{" "}
-          <span className={styles.sunsetTime}>{formatDateUTC(sunrise)}</span>
+          <span className={styles.sunsetTime}>
+            {convertUnixToDetailedDateTime(currentWeather?.sunrise).time}
+          </span>
         </p>
         <p className={styles.tempDetailsText}>
           Set:{" "}
-          <span className={styles.sunsetTime}>{formatDateUTC(sunset)}</span>
+          <span className={styles.sunsetTime}>
+            {convertUnixToDetailedDateTime(currentWeather?.sunset).time}
+          </span>
         </p>
         {minTemp && (
           <p className={styles.tempDetailsText}>

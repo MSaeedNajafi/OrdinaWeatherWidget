@@ -5,8 +5,8 @@ import ForecastCondition, {
   ForecastConditionProps,
 } from "../ForecastCondition/ForecastCondition";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
+import WeatherDetail from "../WeatherDetail/WeatherDetail";
 
-// Define the types
 type HourlyForecastProps = {
   hourly: any[];
 };
@@ -42,7 +42,11 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
                   description={condition.description}
                   icon={condition.icon}
                 />
-                <p>{hour.temp.toFixed()} °</p>
+                <WeatherDetail
+                  label={""}
+                  value={Number(hour.temp).toFixed()}
+                  unit={"°"}
+                />
               </div>
             ))}
         </div>

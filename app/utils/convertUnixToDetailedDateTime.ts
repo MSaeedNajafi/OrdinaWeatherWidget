@@ -1,6 +1,7 @@
 export function convertUnixToDetailedDateTime(unixTime: number) {
   // convert seconds to milliseconds
   const date = new Date(unixTime * 1000);
+
   const hour = date.getHours();
 
   const formattedDate = date.toLocaleDateString(undefined, {

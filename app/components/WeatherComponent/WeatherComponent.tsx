@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, FormEvent } from "react";
+import classNames from "classnames";
 import styles from "./WeatherComponent.module.css";
 import CurrentDateTime from "../CurrentDateTime/CurrentDateTime";
 import TempratureDetails from "../TempratureDetails/TemperatureDetails";
@@ -13,61 +14,48 @@ import getLocationDataByLatAndLon from "@/app/utils/locationServiceByLatAndLon";
 import LocationSVG from "../../icons/location-pin-svgrepo-com.svg";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import SearchIcon from "../../icons/search-svgrepo-com.svg";
+import Cities from "../Cities/Cities";
 
-const Input: React.FC = () => {
+const WeatherComponent: React.FC = () => {
   const [city, setCity] = useState("");
   const [submitted, setSubmitted] = useState(false);
   // store fetched data
-  const [locationData, setLocationData] = useState(null);
-  const [weatherData, setWeatherData] = useState(null);
-  const [forecast, setForecast] = useState([]);
+  const [unit, setUnit] = useState("celsius");
+  const [currentWeather, setCurrentWeather] = useState<any>([]);
   const [daily, setDaily] = useState<any[]>([]);
   const [hourly, setHourly] = useState<any[]>([]);
-  const [feels, setFeels] = useState(0);
-  const [humidity, setHumidity] = useState(0);
-  const [sunrise, setSunrise] = useState(0);
-  const [sunset, setSunset] = useState(0);
-  const [temp, setTemp] = useState(0);
-  const [wind, setWind] = useState(0);
   const [cityName, setCityName] = useState("");
   const [countryName, setCountryName] = useState("");
   const [state, setState] = useState("");
-  const [currentTime, setCurrentTime] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [location, setLocation] = useState<Location | null>(null);
-  const [locationError, setLocationError] = useState<string | null>(null);
 
-  const fetchWeather = async (lat: string, lon: string) => {
-    setError(null);
+  const fetchWeather = async (lat: number, lon: number) => {
+    setError(null); // Reset the error state
     const weatherResponse = await getWeatherData(lat, lon);
-    // console.log(weatherResponse);
-    setWeatherData(weatherResponse);
-    setForecast(weatherResponse.current.weather);
-    setFeels(weatherResponse.current.feels_like);
-    setHumidity(weatherResponse.current.humidity);
-    setSunrise(weatherResponse.current.sunrise);
-    setSunset(weatherResponse.current.sunset);
-    setTemp(weatherResponse.current.temp);
-    setWind(weatherResponse.current.wind_speed);
-    setCurrentTime(weatherResponse.current.dt);
-    setDaily(weatherResponse.daily);
-    setHourly(weatherResponse.hourly);
+    if (weatherResponse.success) {
+      // The response is successful, update the weather states
+      setCurrentWeather(weatherResponse.data.current);
+      setDaily(weatherResponse.data.daily);
+      setHourly(weatherResponse.data.hourly);
+      setSubmitted(true);
+    } else {
+      setCurrentWeather(null);
+      setDaily([]);
+      setHourly([]);
+      setError(weatherResponse.error);
+      setSubmitted(false);
+    }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const fetchLocation = async (city: string) => {
     if (city.length === 0) {
       return;
     }
-    e.preventDefault();
-    setError(null);
-
     try {
       setLoading(true);
       setSubmitted(true);
       const locationData = await getLocationDataByName(city);
-      setLocationData(locationData);
-
       if (locationData.length > 0) {
         const { name, country, state, lon, lat } = locationData[0];
         setCityName(name);
@@ -76,15 +64,19 @@ const Input: React.FC = () => {
         await fetchWeather(lat, lon);
         setLoading(false);
       } else {
-        throw new Error("No location data found");
+        throw new Error("No location found.");
       }
     } catch (error) {
       setLoading(false);
-      setLocationData(null);
       setSubmitted(false);
-      setWeatherData(null);
       setError(error + "");
     }
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    await fetchLocation(city);
   };
 
   const handleChanage = (e: any) => {
@@ -94,28 +86,44 @@ const Input: React.FC = () => {
 
   const handleGetLocation = async () => {
     setLoading(true);
-    setSubmitted(true);
     try {
       const loc = await getLocation();
       const locationData = await getLocationDataByLatAndLon(
         loc.latitude.toString(),
         loc.longitude.toString()
       );
-      setCity(locationData[0].name);
-      setCityName(locationData[0].name);
-      setCountryName(locationData[0].country);
-      setState(locationData[0].state);
-      await fetchWeather(loc.latitude.toString(), loc.longitude.toString());
-      setLocation(loc);
-      setLocationError(null);
+
+      const { name, country, state } = locationData[0];
+      setCity(name);
+      setCityName(name);
+      setCountryName(country);
+      setState(state);
+      await fetchWeather(loc.latitude, loc.longitude);
     } catch (err) {
-      setLocationError(err + "");
+      setError(err + "");
     }
     setLoading(false);
   };
 
+  const cities = [
+    { id: 1, name: "Berlin" },
+    { id: 2, name: "Dubai" },
+    { id: 3, name: "Amsterdam" },
+    { id: 4, name: "Bangkok" },
+    { id: 5, name: "Tokyo" },
+    { id: 6, name: "Chicago" },
+  ];
+
+  const getBackground =
+    currentWeather?.temp === undefined
+      ? ""
+      : currentWeather?.temp > 20
+      ? styles.gradientHot
+      : styles.gradientCold;
+
   return (
-    <div className={styles.main}>
+    <div className={classNames(styles.main, getBackground)}>
+      <Cities cities={cities} setCity={setCity} fetchLocation={fetchLocation} />
       <div className={styles.formContainer}>
         <Form
           city={city}
@@ -135,9 +143,9 @@ const Input: React.FC = () => {
           handleClick={handleGetLocation}
         />
         <div className={styles.unitSwitchContainer}>
-          <p>°C</p>
+          <p onClick={() => setUnit("celsius")}>°C</p>
           {"|"}
-          <p>°F</p>
+          <p onClick={() => setUnit("fahrenheit")}>°F</p>
         </div>
       </div>
       {error && <p>{error}</p>}
@@ -146,20 +154,14 @@ const Input: React.FC = () => {
       ) : (
         submitted && (
           <div className={styles.weatherInfoContainer}>
-            <CurrentDateTime currentTime={currentTime} />
+            <CurrentDateTime currentTime={currentWeather?.dt} />
             <h2>
               {cityName}, {state && state + ", "} {countryName}
             </h2>
             <TempratureDetails
-              details={forecast}
-              feelsLike={feels}
-              humidity={humidity}
-              sunrise={sunrise}
-              sunset={sunset}
-              temp={temp}
-              wind={wind}
-              maxTemp={daily[0].temp && daily[0]?.temp.max.toFixed()}
-              minTemp={daily[0].temp && daily[0]?.temp.min.toFixed()}
+              currentWeather={currentWeather}
+              maxTemp={daily[0]?.temp && daily[0]?.temp.max.toFixed()}
+              minTemp={daily[0]?.temp && daily[0]?.temp.min.toFixed()}
             />
             <HourlyForecast hourly={hourly} />
             <DailyForecast daily={daily} />
@@ -170,4 +172,4 @@ const Input: React.FC = () => {
   );
 };
 
-export default Input;
+export default WeatherComponent;

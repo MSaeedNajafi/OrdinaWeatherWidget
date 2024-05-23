@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./ForecastCondition.module.css";
 
-// Define the types
 export type ForecastConditionProps = {
   id: number;
   main: string;

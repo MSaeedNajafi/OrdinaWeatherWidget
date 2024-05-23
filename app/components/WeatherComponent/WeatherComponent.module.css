@@ -2,13 +2,20 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* background-color: blue; */
+  background-color: aquamarine;
+  padding: 1rem;
 }
 
-.button {
-  background-color: blueviolet;
-  padding: 10px 20px;
-  border: none;
+.gradientHot {
+  background: linear-gradient(to bottom, rgb(245, 200, 85), rgb(247, 145, 43));
+}
+
+.gradientCold {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 150, 167, 0.828),
+    rgb(25, 118, 210)
+  );
 }
 
 .input {
@@ -18,7 +25,6 @@
 }
 
 .weatherInfoContainer {
-  /* background-color: red; */
   margin-top: 1rem;
   display: flex;
   flex-direction: column;

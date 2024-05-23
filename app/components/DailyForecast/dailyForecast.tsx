@@ -5,19 +5,14 @@ import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import ForecastCondition from "../ForecastCondition/ForecastCondition";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
 
-// Define the types
 type DailyForecastProps = {
   daily: any[];
 };
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
   const renderItems = [];
-
   for (const day of daily) {
-    console.log("day: ", day);
-
     const { dayOfWeek, monthAndDate } = convertUnixToDetailedDateTime(day.dt);
-
     renderItems.push(
       <div key={day.dt} className={styles.dayCard}>
         <p style={{ cursor: "help" }} title={day.summary}>

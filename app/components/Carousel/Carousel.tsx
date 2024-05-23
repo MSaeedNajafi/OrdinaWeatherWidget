@@ -1,5 +1,5 @@
 import React, { useRef, useState, MouseEvent } from "react";
-import styles from "./Carousel.module.css"; // Import your CSS file
+import styles from "./Carousel.module.css";
 
 interface CarouselProps {
   children: React.ReactNode;
