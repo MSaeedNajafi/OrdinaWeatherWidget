@@ -26,16 +26,18 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
 }) => {
   return (
     <div className={styles.temperatureDetailsContainer}>
-      {currentWeather?.weather &&
-        currentWeather?.weather.map((condition: ForecastConditionProps) => (
-          <div key={condition.id}>
-            <ForecastCondition
-              id={condition.id}
-              main={condition.main}
-              description={condition.description}
-            />
-          </div>
-        ))}
+      <div className={styles.forecastCondition}>
+        {currentWeather?.weather &&
+          currentWeather?.weather.map((condition: ForecastConditionProps) => (
+            <div key={condition.id}>
+              <ForecastCondition
+                id={condition.id}
+                main={condition.main}
+                description={condition.description}
+              />
+            </div>
+          ))}
+      </div>
       <div className={styles.tempratureDetails}>
         <div className={styles.forecastContainer}>
           {currentWeather?.weather &&

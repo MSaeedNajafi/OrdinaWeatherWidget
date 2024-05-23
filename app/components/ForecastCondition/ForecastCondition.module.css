@@ -1,9 +1,10 @@
-.forecastContainer,
 .forecastInfo {
   display: flex;
   align-items: center;
 }
 
-.WeatherCondition {
+.weatherCondition {
   cursor: help;
+  font-weight: bold;
+  font-size: 20px;
 }

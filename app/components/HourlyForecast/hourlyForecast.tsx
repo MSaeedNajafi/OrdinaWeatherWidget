@@ -27,7 +27,7 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
         <div>
           {hour.weather &&
             hour.weather.map((condition: ForecastConditionProps) => (
-              <div key={condition.id} className={styles.ForecastCondition}>
+              <div key={condition.id} className={styles.forecastCondition}>
                 <ForecastCondition
                   id={condition.id}
                   main={""}

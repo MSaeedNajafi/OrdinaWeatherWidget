@@ -17,14 +17,14 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
     renderItems.push(
       <div key={day.dt} className={styles.dayCard}>
         <p
-          className={styles.text}
+          className={styles.label}
           title={day.summary}
           style={{ cursor: "help" }}
         >
           {dayOfWeek}
         </p>
-        <p className={styles.text}>{monthAndDate}</p>
-        <div className={styles.ForecastCondition}>
+        <p className={styles.label}>{monthAndDate}</p>
+        <div className={styles.forecastCondition}>
           <ForecastCondition
             id={day.weather[0].id}
             main={""}

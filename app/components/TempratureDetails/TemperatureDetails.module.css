@@ -16,16 +16,7 @@
   font-weight: bold;
 }
 
-.tempDetailsText {
-  font-size: 12px;
-}
-
-.sunsetTime {
-  font-weight: 800;
-}
-
-.forecastContainer,
-.forecastInfo {
+.forecastContainer {
   display: flex;
   align-items: center;
 }
@@ -35,4 +26,8 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 8px;
+}
+
+.forecastCondition {
+  padding: 16px;
 }

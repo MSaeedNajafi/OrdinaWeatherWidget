@@ -10,7 +10,7 @@ const ForecastCondition: React.FC<ForecastConditionProps> = ({
 }) => {
   return (
     <div key={id} className={styles.forecastInfo}>
-      <p title={description} className={styles.WeatherCondition}>
+      <p title={description} className={styles.weatherCondition}>
         {main}
       </p>
       {icon && (
