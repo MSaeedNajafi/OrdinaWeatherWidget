@@ -4,7 +4,7 @@ const BASE_URL = "http://api.openweathermap.org/geo/1.0/direct";
 const getLocationDataByName = async (city: string) => {
   const url = `${BASE_URL}?q=${city}&appid=${API_KEY}`;
   try {
-    // Fetch location data
+    // Fetch location data by city name
     const response = await fetch(url);
     const data = await response.json();
     return data;

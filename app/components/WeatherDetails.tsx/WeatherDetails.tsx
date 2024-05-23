@@ -10,8 +10,8 @@ interface WeatherInfoProps {
   cityName: string;
   state?: string;
   countryName: string;
-  daily: any[]; // Adjust the type as per your data structure
-  hourly: any[]; // Adjust the type as per your data structure
+  daily: any[];
+  hourly: any[];
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
