@@ -29,7 +29,7 @@ const getWeatherData = async (
   } catch (error) {
     return {
       success: false,
-      error: "Network error or invalid JSON response",
+      error: error + "",
     };
   }
 };

@@ -6,6 +6,13 @@ import ForecastCondition, {
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import { formatDateTime } from "@/app/utils/formatDateTime";
 import { convertUnixToDetailedDateTime } from "@/app/utils/convertUnixToDetailedDateTime";
+import temptratureIcon from "../../icons/temperature-full-svgrepo-com.svg";
+import humidityIcon from "../../icons/water-drop-svgrepo-com.svg";
+import windIcon from "../../icons/wind-svgrepo-com.svg";
+import arrowDownIcon from "../../icons/arrow-down-svgrepo-com.svg";
+import arrowTopIcon from "../../icons/arrow-top-svgrepo-com.svg";
+import sunriseIcon from "../../icons/sun-svgrepo-com.svg";
+import sunsetIcon from "../../icons/sunset-svgrepo-com.svg";
 
 // Define the types
 type WeatherCondition = {
@@ -55,44 +62,53 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
         <p className={styles.temp}>{currentWeather?.temp?.toFixed()}°</p>
         <div>
           <WeatherDetail
-            label={"feels Like: "}
+            label={"Feels Like: "}
             value={currentWeather?.feels_like?.toFixed()}
             unit={"°"}
+            icon={temptratureIcon}
           />
           <WeatherDetail
-            label={"humidity: "}
+            label={"Humidity: "}
             value={currentWeather?.humidity?.toFixed()}
             unit={"%"}
+            icon={humidityIcon}
           />
           <WeatherDetail
-            label={"wind: "}
+            label={"Wind: "}
             value={currentWeather?.wind_speed?.toFixed()}
             unit={"m/h"}
+            icon={windIcon}
           />
         </div>
       </div>
       <div className={styles.sunsetContainer}>
-        <p className={styles.tempDetailsText}>
-          Rise:{" "}
-          <span className={styles.sunsetTime}>
-            {convertUnixToDetailedDateTime(currentWeather?.sunrise).time}
-          </span>
-        </p>
-        <p className={styles.tempDetailsText}>
-          Set:{" "}
-          <span className={styles.sunsetTime}>
-            {convertUnixToDetailedDateTime(currentWeather?.sunset).time}
-          </span>
-        </p>
+        <WeatherDetail
+          label={"Rise: "}
+          value={convertUnixToDetailedDateTime(currentWeather?.sunrise).time}
+          unit={""}
+          icon={sunriseIcon}
+        />
+        <WeatherDetail
+          label={"Set: "}
+          value={convertUnixToDetailedDateTime(currentWeather?.sunset).time}
+          unit={""}
+          icon={sunsetIcon}
+        />
         {minTemp && (
-          <p className={styles.tempDetailsText}>
-            Min: <span className={styles.sunsetTime}>{minTemp}°</span>
-          </p>
+          <WeatherDetail
+            label={"Low: "}
+            value={minTemp.toString()}
+            unit={"°"}
+            icon={arrowDownIcon}
+          />
         )}
         {maxTemp && (
-          <p className={styles.tempDetailsText}>
-            Max: <span className={styles.sunsetTime}>{maxTemp}°</span>
-          </p>
+          <WeatherDetail
+            label={"High: "}
+            value={maxTemp.toString()}
+            unit={"°"}
+            icon={arrowTopIcon}
+          />
         )}
       </div>
     </div>

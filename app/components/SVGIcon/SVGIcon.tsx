@@ -7,7 +7,7 @@ interface SVGIconProps {
   width: number;
   height: number;
   alt?: string;
-  handleClick: (e: FormEvent) => Promise<void>;
+  handleClick?: (e: FormEvent) => Promise<void>;
 }
 
 const SVGIcon: React.FC<SVGIconProps> = ({
